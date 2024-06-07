@@ -13,7 +13,6 @@ FLAG = False
 class Model:
     def __init__(self , urls):
         self.__urls__ = urls
-        self.__train__ = None
         self.__test__ = None
         self.__data__ = None
         
@@ -99,20 +98,15 @@ class Model:
         else:
             print("Failed to fetch the webpage. Status code:", response.status_code)
 
-    def split_test_train(self):
-        train_claim_sentences = []
+    def get_text_test(self):
         test_claim_sentences = []
 
         # Data Collection and Preprocessing
         for i, url in enumerate(self.__urls__):
             # Fetch and process the text from the URL
             text = self.url_reader(url)
-            if i == 2:
-                test_claim_sentences = text
-            else:
-                train_claim_sentences.extend(text)
+            test_claim_sentences.extend(text)
 
-        self.__train__ = train_claim_sentences 
         self.__test__ = test_claim_sentences
     
     
@@ -124,31 +118,26 @@ class Model:
         vectors = [model.wv[word] for word in words]
         return np.mean(vectors, axis=0)
 
-    def test_model_KMeansW2V(self , kmeans_model , test_claim_sentences , word2vec_model):
-        new_data_vectors = np.array([self.sentence_to_vector(sentence, word2vec_model) for sentence in test_claim_sentences])
-        if len(new_data_vectors) > 0:
-            new_data_clusters = kmeans_model.predict(new_data_vectors)
-            
-            # Calculate distances to cluster centers for probability-like measure
-            distances = kmeans_model.transform(new_data_vectors)
 
-            self.print_the_results(new_data_clusters, test_claim_sentences)
         
     
     def model_KMeansW2V(self, num_clusters):
-        self.split_test_train()
-        train_claim_sentences = self.__train__
+        self.get_text_test()
         test_claim_sentences = self.__test__
-        # Train Word2Vec model
-        word2vec_model = Word2Vec(sentences=[sentence.split() for sentence in train_claim_sentences], vector_size=100, window=5, min_count=1, workers=4)
 
-        train_vectors = np.array([self.sentence_to_vector(sentence, word2vec_model) for sentence in train_claim_sentences])
+        word2vec_model = Word2Vec(sentences=[sentence.split() for sentence in test_claim_sentences], vector_size=100, window=5, min_count=1, workers=4)
+
+        test_vectors = np.array([self.sentence_to_vector(sentence, word2vec_model) for sentence in test_claim_sentences])
 
         # Topic Modeling (K-means clustering)
         kmeans_model = KMeans(n_clusters=int(num_clusters), random_state=42)
-        kmeans_model.fit(train_vectors)
+        kmeans_model.fit(test_vectors)
 
-        self.test_model_KMeansW2V(kmeans_model , test_claim_sentences , word2vec_model)
+        new_data_vectors = np.array([self.sentence_to_vector(sentence, word2vec_model) for sentence in test_claim_sentences])
+        if len(new_data_vectors) > 0:
+            new_data_clusters = kmeans_model.predict(new_data_vectors)
+
+            self.print_the_results(new_data_clusters, test_claim_sentences)
 
 
 
