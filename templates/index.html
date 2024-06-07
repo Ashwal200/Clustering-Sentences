@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Input</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .center-content {
+            text-align: center;
+        }
+        .output{
+            text-align: center;
+            margin-top: 50px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-content">
+        <h1>Enter a Numbers of Groups</h1>
+        <form action="/submit" method="post">
+            <input type="text" name="number" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="output">
+        {% if output == False %}
+        <h2 style="color: red;">Please enter a valid number and submit the form to see the output.</h2>
+        {% else %}
+        <h2>Response:</h2>
+        <h2>{{ output }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+Overview
+
+Task 1: Extracting text from patents
+
+
+
+
+
+Task 2: Grouping claims by topic
+
+I was looking for different ways to group paragraphs together, so I searched online. 
+I found a blog on Quora about efficient methods for clustering sentences. 
+But, like in many things in machine learning, there's no single best way. 
+It depends on stuff like the data and how many groups you want.
+
+I remember a contest at my university where we had to group VBACode into 'white' and 'malware.' 
+We tried a bunch of methods, like applying BERT embeddings or SentenceTransformer with k-means. 
+But there wasn't one method or specific model that worked best for clustering VBAcode it depends on the data. 
+It was more about trying different things and seeing what worked best for that situation to get the best accuracy without getting overfitting.
+
+So, when looking for the best way to group paragraphs, 
+you gotta think about your data and try out different methods to see what works best for you.
+
+In my Jupyter Notebook, I used three methods:
+1. Word Embeddings with Word2Vec and KMeans: 
+I'm familiar with this method from past projects. 
+It involves representing words as vectors and then using KMeans clustering to group them.
+
+2. Word Embeddings with SentenceTransformer and KMeans: 
+Another method I've used before. 
+It allowing similar sentences to be grouped together based on their meanings. 
+It's a powerful method for understanding text data efficiently.
+
+3. Topic Modeling with Latent Dirichlet Allocation (LDA): 
+This method was new to me, so I had to explore it to understand how it works and how to implement it. 
+I found helpful resources like 
+ - https://radimrehurek.com/gensim/models/ldamodel.html
+ - https://bennett-holiday.medium.com/a-step-by-step-guide-to-writing-an-lda-program-in-python-690aa99119ea
+
+Explain why method 1:
+
+I chose the Word Embeddings with Word2Vec and KMeans model because it captures word meanings well, improving search, recommendations, and content analysis. 
+1. This model is versatile, working for tasks like sentiment analysis and text classification. 
+2. It's efficient, processing text data quickly for fast responses and smooth user experiences. 
+3. It integrates easily with web frameworks like Flask or Django.
+In some cases, Word Embeddings with SentenceTransformer and KMeans performed better, but it had issues in exceptional cases.
