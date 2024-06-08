@@ -1,25 +1,25 @@
 Overview
 
 Task 1: Extracting text from patents
-
-
-
+This task designed to scrape patent documents from Google Patents and extract sentences containing specific keywords related to claims and assertions.
+I followed your advice and used the BeautifulSoup library for web scraping. Another option I'm familiar with is using the PyPDF2 library for working with PDF files. However, PyPDF2 isn't capable of extracting data from PDFs with two columns of text. BeautifulSoup, on the other hand, is a Python library specifically designed to extract data from web pages. It simplifies the process of parsing the messy HTML code of a web page, locating specific information, and extracting it, making it a convenient tool for gathering data from websites.
+Overall, this task automates the process of scraping patent documents from Google Patents, extracting relevant sentences, and presenting them for further analysis or processing.
 
 
 Task 2: Grouping claims by topic
 
 I was looking for different ways to group paragraphs together, so I searched online. 
-I found a blog on Quora about efficient methods for clustering sentences. 
-But, like in many things in machine learning, there's no single best way. 
-It depends on stuff like the data and how many groups you want.
+I found a blog on Quora (https://www.quora.com/What-are-some-efficient-methods-of-clustering-sentences-that-mean-the-same) about efficient methods for clustering sentences. 
+But, like in many things in machine learning, there's no single best way. So, I did explore the data and try out various approaches. The choice depends on the nature of the data.
 
 I remember a contest at my university where we had to group VBACode into 'white' and 'malware.' 
 We tried a bunch of methods, like applying BERT embeddings or SentenceTransformer with k-means. 
-But there wasn't one method or specific model that worked best for clustering VBAcode it depends on the data. 
-It was more about trying different things and seeing what worked best for that situation to get the best accuracy without getting overfitting.
+But there wasn't one method or specific model that worked best for clustering VBAcode it depends on the data. It was more about trying different things and seeing what worked best for that situation to get the best accuracy without getting overfitting.
 
-So, when looking for the best way to group paragraphs, 
-you gotta think about your data and try out different methods to see what works best for you.
+When seeking the optimal method for grouping paragraphs, it's crucial to consider the characteristics of your data and experiment with various techniques to determine the most effective approach. In our case, the data is unsupervised, which means it lacks predefined categories or labels. In unsupervised learning, algorithms are tasked with finding patterns or structures in the data without explicit guidance. Therefore, exploring different clustering algorithms and evaluating their performance on your data can help identify the most suitable method for grouping paragraphs.
+I thought about adding labels manually, but I hesitated because of overfitting. Overfitting occurs when a model memorizes noise or random patterns in the data instead of learning the true underlying relationships. This can lead to poor performance on new data. Also we have a small amount of data.
+I see, this Medium article offers a beginner-friendly tutorial on implementing KMeans clustering with scikit-learn for unsupervised machine learning
+https://medium.com/ascentic-technology/unsupervised-machine-learning-kmeans-clustering-with-scikit-learn-bc8895cd66a8
 
 In my Jupyter Notebook, I used three methods:
 1. Word Embeddings with Word2Vec and KMeans: 
@@ -37,10 +37,19 @@ I found helpful resources like
  - https://radimrehurek.com/gensim/models/ldamodel.html
  - https://bennett-holiday.medium.com/a-step-by-step-guide-to-writing-an-lda-program-in-python-690aa99119ea
 
-Explain why method 1:
+
+How i choose the tittles:
+I realized that using existing tools or models to find a single-word title for each group wasn't the best approach. 
+These tools rely on mathematical equations and simply select a title based on the words in the sentence. Instead, I opted to create my own solution. 
+I compiled a list of titles along with the words associated with each title. Then, I individually assessed each cluster to determine the most suitable title. 
+To aid in this process, I developed a probability function based on the number of words in each sentence. This allowed me to choose titles that closely matched the content of each cluster.
 
 I chose the Word Embeddings with Word2Vec and KMeans model because it captures word meanings well, improving search, recommendations, and content analysis. 
 1. This model is versatile, working for tasks like sentiment analysis and text classification. 
 2. It's efficient, processing text data quickly for fast responses and smooth user experiences. 
 3. It integrates easily with web frameworks like Flask or Django.
 In some cases, Word Embeddings with SentenceTransformer and KMeans performed better, but it had issues in exceptional cases.
+
+
+Given additional time, my plan would involve enhancing the README file by providing comprehensive explanations of the project's logic and functionalities. 
+Furthermore, I intend to augment the project's capabilities by integrating a database equipped with labeled data. This enhancement would involve transforming the existing model into a supervised learning model, allowing for more precise and informed predictions or classifications.

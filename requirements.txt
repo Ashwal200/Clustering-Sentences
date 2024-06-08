@@ -1,6 +1,5 @@
 # Note that you need to install Python 3.11.2
-pypdfium2
-pytesseract
+beautifulsoup4
 requests
 bs4
 scikit-learn 
