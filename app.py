@@ -55,4 +55,4 @@ def submit():
 
 if __name__ == '__main__':
     # Run the Flask application with debug mode enabled on port 5004
-    app.run(debug=True, port=5005)
+    app.run(host='0.0.0.0',debug=True, port=5005)
