@@ -12,5 +12,5 @@ COPY . .
 
 # Install any needed dependencies specified in requirements.txt
 RUN pip install -r requirements.txt
-
+EXPOSE 5005
 CMD [ "python3", "app.py" ]
