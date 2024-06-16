@@ -43,7 +43,7 @@ Now you can successfully use the project.
   - Open Docker Desktop
   - Open terminal and run 
     - docker build -t machine .
-    - docker run -it machine
+    - docker run -p 5005:5005 machine 
   - After this you will successfully run the application
     - Open Google and insert the provided URL 
     - Insert number of cluster to see result
